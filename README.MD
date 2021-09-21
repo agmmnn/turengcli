@@ -3,7 +3,7 @@
 <a href="https://pypi.org/project/turengcli/">
 <img alt="PyPI" src="https://img.shields.io/pypi/v/turengcli"></a>
 
-Command-line tool for [tureng.com](https://www.etymonline.com/) with rich output..
+Command-line tool for [tureng.com](https://tureng.com/) with rich output.
 
 ```
 pip install turengcli
