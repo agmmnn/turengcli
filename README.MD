@@ -19,7 +19,7 @@ tureng <word>
 # example usage with -d(detailed results) argument
 tureng goner -d
 ```
-![detailed results](https://raw.githubusercontent.com/agmmnn/turengcli/master/imgs/ss.png)
+![detailed results](https://raw.githubusercontent.com/agmmnn/turengcli/master/imgs/ss_detailed.png)
 
 # Arguments
 
@@ -40,7 +40,7 @@ $ tureng renas -f
 # Requirements
 - Python >3.5
 
-## Depencies
+## Dependencies
 - [requests](https://pypi.org/project/requests/)
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
 - [rich](https://pypi.org/project/rich/)
