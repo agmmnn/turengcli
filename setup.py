@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as file:
     requires = [line.strip() for line in file.readlines()]
 
 VERSION = m.__version__
-DESCRIPTION = "Command-line tool for tureng with rich output."
+DESCRIPTION = "Command-line tool for tureng (tureng.com) with rich output."
 
 setup(
     name="turengcli",
