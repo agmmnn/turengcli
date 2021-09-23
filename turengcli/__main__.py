@@ -30,7 +30,7 @@ args = ap.parse_args()
 
 
 def cli():
-    word = "".join(args.word)
+    word = " ".join(args.word)
     print("Please enter a word.") if word == "" else TurengDict(word, args)
 
 
