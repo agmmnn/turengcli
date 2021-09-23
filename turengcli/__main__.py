@@ -1,7 +1,7 @@
 from turengcli.cli import TurengDict
 import argparse
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 # parse arguments
 ap = argparse.ArgumentParser()
@@ -10,6 +10,13 @@ ap.add_argument(
     type=str,
     nargs="*",
     help="<word>",
+)
+ap.add_argument(
+    "-d",
+    "--detailed",
+    action="store_true",
+    default=False,
+    help="detailed results",
 )
 ap.add_argument(
     "-p",

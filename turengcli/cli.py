@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup
 from urllib.parse import quote
 import requests
 import json
-from rich.console import Console
-from rich.table import Table
+
 from rich import box
+from rich.table import Table
+from rich.console import Console
 from rich import print as rprint
 
 
@@ -16,6 +17,8 @@ class TurengDict:
 
         if self.args.fuzzy:
             self.fuzzy()
+        elif self.args.detailed:
+            self.detailed()
         else:
             self.req()
             self.main()
@@ -52,10 +55,59 @@ class TurengDict:
         for i in self.dic:
             table.add_row(i, ", ".join(self.dic[i]))
         rprint(table)
-        rprint(
-            "[link=https://tureng.com/tr/turkce-ingilizce/{}]tureng.com↗[/link]".format(
+        Console().print(
+            "[grey42][link=https://tureng.com/tr/turkce-ingilizce/{}]tureng.com↗[/link]".format(
                 quote(self.word)
+            ),
+            justify="right",
+        )
+
+    def detailed(self):
+        url = "https://tureng.com/tr/turkce-ingilizce/" + self.word
+        headers = {"User-Agent": "Mozilla/5.0"}
+        r = requests.get(url, headers=headers)
+        soup = BeautifulSoup(r.content, "lxml")
+        title = soup.title.text
+        table = soup.find_all("table", {"id": "englishResultsTable"})
+        result = []
+        for idx, i in enumerate(table):
+            tr = i.find_all("tr")
+            frm_to = (
+                i.tr.find("th", class_="c2").text
+                + "->"
+                + i.tr.find("th", class_="c3").text
             )
+            result.append([[frm_to]])
+            for j in tr:
+                t = j.find_all("td")
+                if len(t) > 3:
+                    result[idx].append(
+                        [t[1].text.strip(), t[2].text.strip(), t[3].text.strip()]
+                    )
+        h2 = soup.find_all("h2")
+        for a, i in enumerate(result):
+            for idx, j in enumerate(i):
+                if idx == 0:
+                    globals()[f"table{a}"] = Table(
+                        title=h2[a].text,
+                        show_header=True,
+                        box=box.SQUARE,
+                        show_lines=False,
+                        row_styles=("medium_spring_green", "cyan"),
+                        expand=True,
+                    )
+                    globals()[f"table{a}"].add_column("", justify="right")
+                    globals()[f"table{a}"].add_column(j[0].split("->")[0])
+                    globals()[f"table{a}"].add_column(j[0].split("->")[1])
+                else:
+                    globals()[f"table{a}"].add_row(j[0], j[1], j[2])
+        for s in range(len(result)):
+            Console().print(globals()[f"table{s}"])
+        Console().print(
+            "[grey42][link=https://tureng.com/tr/turkce-ingilizce/{}]tureng.com↗[/link]".format(
+                quote(self.word)
+            ),
+            justify="right",
         )
 
     def main(self):
