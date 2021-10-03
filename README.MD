@@ -24,7 +24,7 @@ tureng goner -d
 
 # Arguments
 
-```python
+```
 # -d, --detailed  detailed results
 $ tureng goner -d
 
