@@ -112,9 +112,14 @@ class TurengDict:
 
     def main(self):
         if self.rslt == None:
-            print("Not found. Try these:")
-            print(", ".join(self.j["MobileResult"]["Suggestions"]))
-            exit()
+            if self.args.correct:
+                Console().print("Auto-correcting: {} -> {}\n".format(self.word, self.j["MobileResult"]["Suggestions"][0]))
+                TurengDict(self.j["MobileResult"]["Suggestions"][0], self.args)
+                exit()
+            else:
+                print("Not found. Try these:")
+                print(", ".join(self.j["MobileResult"]["Suggestions"]))
+                exit()
         else:
             self.dic = {}
             for i in self.rslt:

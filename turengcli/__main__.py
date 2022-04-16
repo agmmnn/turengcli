@@ -12,6 +12,13 @@ ap.add_argument(
     help="<word>",
 )
 ap.add_argument(
+    "-c",
+    "--correct",
+    action="store_true",
+    default=False,
+    help="auto-correct misspelled words",
+)
+ap.add_argument(
     "-d",
     "--detailed",
     action="store_true",
