@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 from urllib.parse import quote
-import requests
-import json
-
+import requests, json
 from rich import box
 from rich.table import Table
 from rich.console import Console
@@ -17,8 +15,6 @@ class TurengDict:
 
         if self.args.fuzzy:
             self.fuzzy()
-        elif self.args.detailed:
-            self.detailed()
         else:
             self.req()
             self.main()
@@ -37,9 +33,9 @@ class TurengDict:
         rprint(", ".join(j))
 
     def plain(self):
-        console = Console(record=True)
+        # console = Console(record=True)
         for i in self.dic:
-            console.print(i + ": " + ", ".join(self.dic[i]))
+            print(i + ": " + ", ".join(self.dic[i]))
         # import pyperclip
         # pyperclip.copy(console.export_text())
 
@@ -113,7 +109,11 @@ class TurengDict:
     def main(self):
         if self.rslt == None:
             if self.args.correct:
-                Console().print("Auto-correcting: {} -> {}\n".format(self.word, self.j["MobileResult"]["Suggestions"][0]))
+                Console().print(
+                    "Auto-correcting: {} -> {}\n".format(
+                        self.word, self.j["MobileResult"]["Suggestions"][0]
+                    )
+                )
                 TurengDict(self.j["MobileResult"]["Suggestions"][0], self.args)
                 exit()
             else:
@@ -131,5 +131,7 @@ class TurengDict:
 
         if self.args.plain:
             self.plain()
+        elif self.args.detailed:
+            self.detailed()
         else:
             self.rich()

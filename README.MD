@@ -28,6 +28,10 @@ tureng goner -d
 # -d, --detailed  detailed results
 $ tureng goner -d
 
+# -c, --correct   auto-correct misspelled input with first suggestion
+$ tureng corrct -d
+> Auto-correcting: corrct -> correct
+
 # -p, --plain   returns plain text output
 $ tureng renascence -p
 > General: uyanış, yeniden doğma

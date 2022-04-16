@@ -1,7 +1,7 @@
-from turengcli.cli import TurengDict
+from .cli import TurengDict
 import argparse
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 # parse arguments
 ap = argparse.ArgumentParser()
@@ -16,7 +16,7 @@ ap.add_argument(
     "--correct",
     action="store_true",
     default=False,
-    help="auto-correct misspelled words",
+    help="auto-correct misspelled input with first suggestion",
 )
 ap.add_argument(
     "-d",
