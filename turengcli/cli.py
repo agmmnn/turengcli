@@ -22,7 +22,12 @@ class TurengDict:
     def req(self):
         url = "http://ws.tureng.com/TurengSearchServiceV4.svc/Search"
         payload = {"Term": self.word}
-        headers = {"Content-Type": "application/json", "Origin": "tureng.com"}
+        user_agent = "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36"
+        headers = {
+            "Content-Type": "application/json",
+            "Origin": "tureng.com",
+            "User-Agent": user_agent,
+        }
         response = requests.post(url, headers=headers, data=json.dumps(payload))
         self.j = json.loads(response.text)  # encoding="utf8"
         self.rslt = self.j["MobileResult"]["Results"]
