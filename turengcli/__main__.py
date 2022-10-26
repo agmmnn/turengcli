@@ -1,7 +1,7 @@
 from .cli import TurengDict
 import argparse
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 # parse arguments
 ap = argparse.ArgumentParser()
