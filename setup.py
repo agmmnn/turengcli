@@ -28,6 +28,6 @@ setup(
     install_requires=requires,
     include_package_data=True,
     package_data={"turengcli": ["turengcli/*"]},
-    python_requires=">=3.5",
+    python_requires=">=3.7",
     entry_points={"console_scripts": ["tureng = turengcli.__main__:cli"]},
 )
