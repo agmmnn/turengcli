@@ -5,18 +5,18 @@
 
 Command-line tool for [tureng.com](https://tureng.com/) with rich output.
 
-```
-pip install turengcli
+```bash
+uv tool install .
 ```
 
 # Usage
 
-```
+```bash
 tureng <word>
 ```
 
-```
-# example usage with -d(detailed results) argument
+```bash
+# example usage with -d (detailed results) argument
 tureng goner -d
 ```
 
@@ -24,34 +24,35 @@ tureng goner -d
 
 # Arguments
 
-```
+```bash
 # -d, --detailed  detailed results
-$ tureng goner -d
+tureng goner -d
 
 # -c, --correct   auto-correct misspelled input with first suggestion
-$ tureng corrct -d
-> Auto-correcting: corrct -> correct
+tureng corrct -d
+# Auto-correcting: corrct -> correct
 
 # -p, --plain   returns plain text output
-$ tureng renascence -p
-> General: uyanış, yeniden doğma
-> History: rönesans
+tureng renascence -p
+# General: uyanış, yeniden doğma
+# History: rönesans
 
 # -f, --fuzzy   returns fuzzy search results
-$ tureng renas -f
-> renascence, renascency, renascent, renascible
+tureng renas -f
+# renascence, renascency, renascent, renascible
 ```
 
-# Requirements
+# Development
 
-- Python >3.5
+```bash
+uv sync
+uv run tureng hello
+```
 
 ## Dependencies
 
-- [requests](https://pypi.org/project/requests/)
-- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+- [curl-cffi](https://pypi.org/project/curl-cffi/)
 - [rich](https://pypi.org/project/rich/)
-- [lxml](https://pypi.org/project/lxml/)
 
 # License
 

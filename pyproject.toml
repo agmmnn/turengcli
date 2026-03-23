@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "turengcli"
+version = "0.0.6"
+description = "Command-line tool for Tureng with rich output."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC0" }
+authors = [{ name = "agmmnn" }]
+dependencies = [
+  "curl-cffi>=0.14.0",
+  "importlib-metadata>=9.0.0",
+  "rich>=13.9.0",
+]
+
+[project.urls]
+Repository = "https://github.com/agmmnn/turengcli"
+
+[project.scripts]
+tureng = "turengcli.__main__:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["turengcli"]
+
+[tool.uv]
+package = true
