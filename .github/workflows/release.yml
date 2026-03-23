@@ -25,17 +25,16 @@ jobs:
       - name: 🐍 Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version-file: "cli/pyproject.toml"
+          python-version-file: "pyproject.toml"
 
       - name: 📦 Build package
         run: uv build
-        working-directory: cli
 
       - name: ✅ Check tag version match
         id: check-version
         run: |
-          VERSION=$(grep -m 1 '^version = ' cli/pyproject.toml | cut -d '"' -f 2)
-          NAME=$(grep -m 1 '^name = ' cli/pyproject.toml | cut -d '"' -f 2)
+          VERSION=$(grep -m 1 '^version = ' pyproject.toml | cut -d '"' -f 2)
+          NAME=$(grep -m 1 '^name = ' pyproject.toml | cut -d '"' -f 2)
           TAG=${GITHUB_REF#refs/tags/v}
           echo "Found version: $VERSION"
           echo "Found package name: $NAME"
@@ -51,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: python-package-distributions
-          path: cli/dist/
+          path: dist/
 
   publish-pypi:
     name: 🚀 Publish to PyPI
@@ -67,12 +66,12 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: python-package-distributions
-          path: cli/dist/
+          path: dist/
 
       - name: 📤 Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: cli/dist/
+          packages-dir: dist/
           skip-existing: true
 
   github-release:
@@ -86,12 +85,12 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: python-package-distributions
-          path: cli/dist/
+          path: dist/
 
       - name: 🚀 Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: cli/dist/*
+          files: dist/*
           generate_release_notes: true
           name: v${{ needs.build.outputs.version }}
           body: |
